@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"crypto/tls"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -38,7 +37,6 @@ func BenchmarkHTTPServer(b *testing.B) {
 	b.StartTimer()
 	doDataLoop(b, client, "http://localhost:8080/json", counter)
 	b.StopTimer()
-	fmt.Printf("BenchmarkHTTPServer completed in %d nanoseconds\n", b.Elapsed())
 }
 
 func BenchmarkHTTP2Server(b *testing.B) {
@@ -60,7 +58,6 @@ func BenchmarkHTTP2Server(b *testing.B) {
 	b.StartTimer()
 	doDataLoop(b, client, url, counter)
 	b.StopTimer()
-	fmt.Printf("BenchmarkHTTPServer2 completed in %d nanoseconds\n", b.Elapsed())
 }
 
 func BenchmarkHTTP3Server(b *testing.B) {
@@ -90,7 +87,6 @@ func BenchmarkHTTP3Server(b *testing.B) {
 	b.StartTimer()
 	doDataLoop(b, client, url, counter)
 	b.StopTimer()
-	fmt.Printf("BenchmarkHTTPServer3 completed in %d nanoseconds\n", b.Elapsed())
 }
 
 func BenchmarkHTTP3ServerWithDefaults(b *testing.B) {
@@ -114,7 +110,6 @@ func BenchmarkHTTP3ServerWithDefaults(b *testing.B) {
 	b.StartTimer()
 	doDataLoop(b, client, url, counter)
 	b.StopTimer()
-	fmt.Printf("BenchmarkHTTPServer3 completed in %d nanoseconds\n", b.Elapsed())
 }
 
 func doDataLoop(b *testing.B, client *http.Client, url string, counter *internal.Counter) {
