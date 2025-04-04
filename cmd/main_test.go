@@ -35,6 +35,7 @@ func BenchmarkHTTPServer(b *testing.B) {
 		},
 	}
 	b.ResetTimer()
+	b.StartTimer()
 	doDataLoop(b, client, "http://localhost:8080/json", counter)
 	b.StopTimer()
 	fmt.Printf("BenchmarkHTTPServer completed in %d nanoseconds\n", b.Elapsed())
