@@ -125,10 +125,15 @@ func doDataLoop(b *testing.B, client *http.Client, url string, counter *internal
 		var wg sync.WaitGroup
 		wg.Add(len(data))
 		counter.ResetCount()
+		sem := make(chan struct{}, 1000)
 		for _, v := range data {
 			delete(v, "id")
+			sem <- struct{}{}
 			go func(payload map[string]interface{}) {
-				defer wg.Done()
+				defer func() {
+					wg.Done()
+					<-sem
+				}()
 				payloadRaw, err := json.Marshal(payload)
 				if err != nil {
 					b.Fatal(err)
